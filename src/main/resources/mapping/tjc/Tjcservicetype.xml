@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.sy.hding.sys.dao.tjc.Tjcservicetype">
+	<select id="servicetypequerys" resultType="Servicetype">
+		<if test="i==1">
+			SELECT * FROM servicetype 
+		</if>
+		<if test="i==2">
+			SELECT * FROM servicetype WHERE stid IN(SELECT stPid FROM servicetype )
+		</if>
+	</select>
+</mapper>
