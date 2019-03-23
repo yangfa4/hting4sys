@@ -10,11 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import com.github.pagehelper.PageHelper;
 
 @Configuration
-<<<<<<< HEAD
-@MapperScan(basePackages = { "com.sy.hding.sys.dao" })
-=======
 @MapperScan(basePackages = { "com.sy.hding.sys" })
->>>>>>> refs/remotes/origin/master
 public class BeansConfig {
 
 	/**

@@ -13,7 +13,7 @@
         SELECT *FROM advertisement where aid=#{aid}
    </select>
    
-   <update id="updateAdvertisement" parameterType="Advertisement">
+   <!-- <update id="updateAdvertisement" parameterType="Advertisement">
        update Advertisement 
        <set>
          <if test="advertise.!=null"></if>
@@ -26,5 +26,5 @@
          <if test="advertise.!=null"></if>
        </set>
        where aid=#{advertise.aid}
-   </update>
+   </update> -->
 </mapper>
