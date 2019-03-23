@@ -25,5 +25,6 @@
          <if test="advertise.!=null"></if>
          <if test="advertise.!=null"></if>
        </set>
+       where aid=#{advertise.aid}
    </update>
 </mapper>
