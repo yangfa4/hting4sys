@@ -1,4 +1,4 @@
-package com.sy.hding.sys.lhq;
+package com.sy.hding.sys;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
