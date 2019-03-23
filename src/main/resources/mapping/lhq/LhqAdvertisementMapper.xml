@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.hding.sys.dao.lhq.ILhqAdvertiseDao">
+  
+    <select id="queryAdvertisementList" resultType="Advertisement">
+        SELECT *FROM advertisement
+    </select>
+    
+   <select id="getAdvertisementByid" resultType="Advertisement">
+        SELECT *FROM advertisement where aid=#{aid}
+   </select>
+   
+   <update id="updateAdvertisement" parameterType="Advertisement">
+       update Advertisement 
+       <set>
+         <if test="advertise.!=null"></if>
+         <if test="advertise.!=null"></if>
+         <if test="advertise.!=null"></if>
+         <if test="advertise.!=null"></if>
+         <if test="advertise.!=null"></if>
+         <if test="advertise.!=null"></if>
+         <if test="advertise.!=null"></if>
+         <if test="advertise.!=null"></if>
+       </set>
+   </update>
+</mapper>
