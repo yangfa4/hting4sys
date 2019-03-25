@@ -12,12 +12,20 @@ import com.sy.hding.sys.biz.tjc.Tjcservicetypebiz;
 import com.sy.hding.sys.pojo.Servicetype;
 
 @RestController
-@RequestMapping("/fuwu")
+@RequestMapping("/sys/fuwu")
 public class TjcservicetypeAc {
 	
 	@Autowired 
 	private Tjcservicetypebiz servicetype;
 	
+	
+	/**
+	 * 查询所有服务
+	 * @param i 状态码
+	 * @param p	
+	 * @param s	
+	 * @return
+	 */
 	@GetMapping("/query/{i}/{p}/{s}")
 	public PageInfo<Servicetype> query(@PathVariable Integer i,@PathVariable Integer p,@PathVariable Integer s){
 		return servicetype.query(i, p, s);
