@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="http://127.0.0.1:4321/css/bootstrap.min.css" />
+		
+		<style type="text/css">
+		
+a {
+	text-decoration: none;
+}
+
+td {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+  table        {            border-collapse: collapse;            margin: 0 auto;            text-align: center;        }        
+  table td, table th        {            border: 1px solid #cad9ea;            color: #666;            height: 30px;        }        
+  table thead th        {            background-color: #CCE8EB;            width: 100px;        }        
+  table tr:nth-child(odd)        {            background: #fff;        }        
+  table tr:nth-child(even)        {            background: #F5FAFA;        }
+
+</style>
+	</head>
+<BODY class=oneColLiqCtrHdr>
+<DIV id="fuwuchaxun">
+    <DIV id=header>
+        <H1>服务类别管理<BR></H1>
+        <form method="get" name="searchform">
+            <TABLE border=0 class="tablesorter" cellSpacing=1 cellPadding=6 width="100%">
+                <TBODY>
+                <TR>
+                    <TD >        
+                   	
+                     
+                   	服务类型: 
+                    <input name="p" type="hidden" value="1" /> 
+                    <input name="s" type="hidden" value="20" />
+                    <input name="userID" type="hidden"  value="" />                    
+						    <select  name="auditStatus" >
+						    		<option value="0">所有的</option>
+						     		<option v-for="(tm,i) in pros.list" v-text="tm.stName" :value="tm.stid"></option>
+						    </select>
+                    <input type="submit" name="button" id="button" value="搜索"></TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+        <input type="hidden" name="__hash__" value="145c14d6052f05a7d49a860273ceb053_edd8a18802a3ce5b879e24d8cc94f326" /></form>
+    </DIV>
+    <DIV id="mainContent"><BR>
+        <FORM method=post name=form2 action="" id="listform">
+            <TABLE id="itemlist" class="tablesorter" border=0 cellSpacing=1 cellPadding=6 width="100%"  style="font-size: 13px">
+                <THEAD>
+                <TR>
+                    <th width="35">序号</th>
+                    <TH width="160" scope=col align=center>名称</TH>
+                    <TH width="160" align=center>排序</TH>
+                    
+                    <TH width="80" scope=col align=center>是否显示</TH>
+                    <TH width="80" scope=col align=center>操作</TH>
+                  </TR>
+                </THEAD>
+                <tbody>
+                   
+                   <tr v-for="(temp,i) in pro.list">
+					<td v-text="i+1"></td>
+					<td v-text="temp.stName"></td>
+					<td v-text="temp.sort"></td>
+				
+				  	<td>
+                               	  	<span v-if="temp.display==1">显示</span>
+                               	  	<span v-if="temp.display==2">不显示</span>
+                               	  
+                               	
+                    </td>
+                   
+					  <td nowrap>
+                      	
+                      <a > 修改</a>
+                      <span ><a > 删除</a></span>
+                      </td>
+				
+					</tr>
+                   </tbody>
+                 		
+                  </TABLE>
+            <TABLE id="itemlist" class="tablesorter" border=0 cellSpacing=1 cellPadding=6 width="100%">
+           	    <tr>
+                 <td colspan="5">
+                   <nav>
+					  <ul class="pager">
+					   	<li><a href="javascript:void(0)" @click="gotoindex()">首页</a></li>
+						<li><a href="javascript:void(0)" @click="gotoNext()">上一页</a></li>
+					    <li><a href="javascript:void(0)" @click="gotoEnd()">下一页</a></li>
+					    <li><a href="javascript:void(0)" @click="gotoPre()">末页</a></li>
+					    <li style="margin-left: 10px;">第{{pro.pageNum}}页/共{{pro.pages}}页&nbsp;&nbsp;共{{pro.size}}条记录</li>
+					  </ul>
+					</nav>
+				</td>
+	           </tr>
+          </TABLE>
+</FORM>
+        <H4>&nbsp;</H4><!-- end #mainContent --></DIV>
+        <DIV id=footer>
+        <P>&nbsp;</P><!-- end #footer --></DIV><!-- end #container --></DIV>
+</BODY>
+	
+		
+	<script type="text/javascript" src="http://127.0.0.1:4321/js/jquery-1.12.4.js"></script>
+	
+    <script type="text/javascript" src="http://127.0.0.1:4321/js/bootstrap.min.js"></script>
+    
+   	<script type="text/javascript" src="http://127.0.0.1:4321/js/menuJson.js"></script>
+    
+    <script type="text/javascript" src="http://127.0.0.1:4321/js/vue.js" ></script>
+    <script type="text/javascript" src="http://127.0.0.1:4321/js/colorCss.js" ></script>
+    <script type="text/javascript" src="http://127.0.0.1:4321/js/convert.js" ></script>
+    
+    <script  >
+    	
+    	/* //解决跨域共享session问题
+		jQuery.ajaxSetup({
+			timeout: 6000,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			async:false
+		}); */
+    	fuwuchaxun=new Vue({
+    		el:"#fuwuchaxun",
+    		data:{		
+    			pro:{},
+    			pros:{}
+    				
+    		},
+    		methods:{
+    			
+    			querySj:function(i,p,s){
+    				var page=this;
+    				$.getJSON("http://127.0.0.1:4321/sys/fuwu/query/"+i+"/"+p+"/"+s,function(json){
+    				page.pro=json;
+    				})
+    			},
+    				gotoindex:function(){
+						this.querySj(1,1,20);
+					},
+					gotoEnd: function() {
+						if(this.pro.isFirstPage){
+							
+							this.querySj(1,this.pro.lastPage, 20);
+						}
+					},
+					gotoNext: function() {
+						if(this.pro.isLastPage){
+							
+							this.querySj(1,this.pro.nextPage, 20);
+						}
+						
+					},
+					gotoPre: function() {
+						
+							this.querySj(1,this.pro.pages,20);
+
+					},
+					querySjs:function(i,p,s){
+	    				var page=this;
+	    				$.getJSON("http://127.0.0.1:4321/sys/fuwu/query/"+i+"/"+p+"/"+s,function(json){
+	    				page.pros=json;
+    				})
+    				}
+    		},
+    		created:function(){
+    			   		
+				this.querySj(1,1,20);
+				this.querySjs(2,1,100);
+			}
+    	});	
+    
+    	
+    </script>
+</html>

@@ -4,12 +4,66 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.sy.hding.sys.dao.tjc.Tjcservicetype">
+	<!-- 查询服务类别 -->
 	<select id="servicetypequerys" resultType="Servicetype">
 		<if test="i==1">
-			SELECT * FROM servicetype 
+			SELECT * FROM servicetype
 		</if>
 		<if test="i==2">
-			SELECT * FROM servicetype WHERE stid IN(SELECT stPid FROM servicetype )
+			SELECT * FROM servicetype WHERE stid IN(SELECT stPid FROM servicetype)
 		</if>
 	</select>
+	
+	<!-- 查询商家提交服务(服务鉴定查询) -->
+	<select id="service_identification" resultType="com.sy.hding.sys.vo.tjc.Services_User_Servicetype">
+		SELECT b.`userRealName`,b.`shopName`,b.`userID`,c.`stName`,a.`serviceTitle`,a.`serviceCoverImg`,
+		a.`serviceImgUrlOne`,a.`serviceImgUrlTwo`,a.`serviceImgUrlThree`,
+		a.`serviceFuTitle`,a.`servicePrice`,a.`serviceCostInclude`,
+		a.`serviceCostTypeID`,a.`serviceIntro`,a.`auditStatus`,
+		a.`shelfState`,a.`recommendBool`,a.`adminOpinion`,a.`serviceID`
+		FROM services AS a
+		JOIN `user` AS b
+		ON a.userID=b.`userID`
+		JOIN servicetype AS c
+		ON a.`stid`=c.`stid`
+		<where>
+			<if test="auditStatus!=0">
+			 	AND a.auditStatus=#{auditStatus}
+			</if>
+			<if test="stid!=0">
+				and a.`stid`=#{stid}		
+			</if>		
+		</where>
+	</select>
+	
+	<update id="servicesupdate">
+		UPDATE 
+  		`hanting4`.`services` 
+		<set>
+			<!-- 修改为推荐 -->
+			<if test="pid==1">
+				 `recommendBool` = 1
+			</if>
+			<!-- 修改为不推荐 -->
+			<if test="pid==2">
+				 `recommendBool` = 0
+			</if>
+			<!-- 审核通过 -->
+			<if test="pid==3">
+				  `auditStatus` = 2
+			</if>
+			<!-- 商品上架 -->
+			<if test="pid==4">
+				 `shelfState` = 1
+			</if>
+			<!-- 商品下架 -->
+			<if test="pid==5">
+				 `shelfState` = 2
+			</if>
+		</set>
+		WHERE `serviceID` in
+		<foreach item="item" collection="mid" open="(" separator="," close=")">
+            #{item}
+		</foreach>;
+	</update>
 </mapper>

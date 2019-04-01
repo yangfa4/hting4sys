@@ -2,18 +2,26 @@ package com.sy.hding.sys;
 
 import java.io.*;
 import java.net.*;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.sy.hding.sys.biz.tjc.Tjcservicetypebiz;
+import com.sy.hding.sys.vo.tjc.Services_User_Servicetype;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class Hanting4SysApplicationTests {
+	@Autowired
+	private Tjcservicetypebiz biz;
+	
 	@Test
 	public void contextLoads() throws IOException {
-		BufferedReader br=null;
+		/*BufferedReader br=null;
 			//访问百度
 			URL ur=new URL("http://apis.juhe.cn/mobile/get?phone=19958128041&dtype=&key=61c6a4822158f67a501d6acf5e91a8f1");
 			//获得连接
@@ -46,14 +54,12 @@ public class Hanting4SysApplicationTests {
 			default:
 				break;
 			}
-		
+		*/
 	}
 	
 	@Test
 	public void ok(){
-		new Thread(
-			
-		);
+		 biz.service_identification(1, 2, 1, 2);
 	}
 
 }
