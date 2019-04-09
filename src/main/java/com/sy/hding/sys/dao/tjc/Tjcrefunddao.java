@@ -5,21 +5,19 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.sy.hding.sys.pojo.Refund;
+import com.sy.hding.sys.vo.tjc.Refund_Orders_User_Services;
 
 public interface Tjcrefunddao {
 	
-	/**
-	 * 查询退款表
-	 * @return
-	 */
-	public  List<Refund> querysrefundt();
 	
 	/**
-	 * 查询退款详情
-	 * @param id
+	 * 查询退款信息
+	 * @param name
 	 * @return
-	 *//*
-	public vo queryvo(@Param("id") int id);*/
+	 */
+	public List<Refund_Orders_User_Services> querysrefundt(@Param("name") String name,@Param("id") int id);
+	
+	
 	
 	/**
 	 * 退款成功

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.sy.hding.sys.dao.tjc.Tjcrefunddao">
+    	<!-- 查询所有退款信息 -->
+    	<select id="querysrefundt" resultType="com.sy.hding.sys.vo.tjc.Refund_Orders_User_Services">
+    		SELECT a.refundID,b.orderID,a.applicationTime,c.userRealName,d.serviceTitle,
+				b.totalPrice,a.auditStatus,a.adminStatus,a.auditTime,a.adminTime,a.businessRemarks,a.adminRemarks,
+				a.point,a.refundReason,a.refundImg,a.applyRefundMoney,a.ActualRefundMoney,a.refundExplain,a.userID AS sjid,d.userID AS yhid
+				FROM refund AS a 
+				JOIN orders AS b
+				ON a.`orderID`=b.`orderID`
+				JOIN `user` AS c
+				ON a.`userID`=c.`userID`
+				JOIN services AS d
+				ON d.`serviceID`=b.`serviceID`
+				<where>
+					<if test="name!=null">
+						and c.userRealName=name
+					</if>
+					<if test="id!=0">
+						and a.refundID=0
+					</if>
+				</where>
+    	</select>
+    	
+    	<!-- 退款成功修改金额 -->
+    	<update id="updateusertjc">
+    		<if test="pid==1">
+    		<!-- 修改用户金额 -->
+    			UPDATE 
+				  `hanting4`.`user` 
+				SET
+				  userMoney=userMoney+#{qi}-#{qi}*0.1
+				WHERE `userID` = #{uid};
+    		</if>
+    		<if test="pid==2">
+    		<!-- 修改商家金额 -->
+    			UPDATE 
+				  `hanting4`.`user` 
+				SET
+				  userMoney=userMoney-#{qi}
+				WHERE `userID` = #{uid};
+    		</if>
+    	</update>
+    	
+    	<!-- 退款修改退款状态 -->
+    	<update id="updaterefundtjc">
+    		<if test="pid==1">
+    			<!-- 退款成功 -->
+    			UPDATE
+			   refund
+				SET
+			   ActualRefundMoney=#{qi}-#{qi}*0.1,
+			   adminStatus=2
+			   WHERE refundID=#{rid};
+    		</if>
+    		
+    		<if test="pid==2">
+    			<!-- 退款失败 -->
+    			UPDATE
+			   refund
+				SET
+			   ActualRefundMoney=0,
+			   adminStatus=2
+			   WHERE refundID=#{rid};
+    		</if>
+    	</update>
+    	
+    </mapper>

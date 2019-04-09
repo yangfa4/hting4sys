@@ -25,12 +25,12 @@ public class Tjcrefundbiz {
 	/**
 	 * 查询退款表
 	 * @return
-	 */
+	 *//*
 	public  PageInfo<Refund> querysrefundt(Integer p,Integer s){
 		PageHelper.startPage(p, s);
 		return new PageInfo<Refund>(dao.querysrefundt());
 	}
-	
+	*/
 	/**
 	 * 查询退款详情
 	 * @param id
