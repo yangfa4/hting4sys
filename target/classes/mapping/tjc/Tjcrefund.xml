@@ -17,12 +17,13 @@
 				ON d.`serviceID`=b.`serviceID`
 				<where>
 					<if test="name!=null">
-						and c.userRealName=name
+						and c.userRealName = #{name}
 					</if>
 					<if test="id!=0">
-						and a.refundID=0
+						and a.refundID=#{id}
 					</if>
 				</where>
+				ORDER BY a.applicationTime DESC 
     	</select>
     	
     	<!-- 退款成功修改金额 -->

@@ -31,4 +31,22 @@ public class TjcackstageAc {
 	public String fwlbsz() {
 		return "tjc/fwlbsz";
 	}
+	
+	
+	/**
+	 * 进入退款审核
+	 * @return
+	 */
+	@GetMapping("tkgl")
+	public String tkgl() {
+		return "tjc/tkgl";
+	}
+	
+	/**
+	 * 退款详情页面
+	 */
+	@GetMapping("tkcl")
+	public String tkcl() {
+		return "tjc/tkcl";
+	}
 }

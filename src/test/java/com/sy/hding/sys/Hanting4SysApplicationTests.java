@@ -2,6 +2,7 @@ package com.sy.hding.sys;
 
 import java.io.*;
 import java.net.*;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
@@ -10,15 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.github.pagehelper.PageInfo;
+import com.sy.hding.sys.biz.tjc.Tjcrefundbiz;
 import com.sy.hding.sys.biz.tjc.Tjcservicetypebiz;
+import com.sy.hding.sys.vo.tjc.Refund_Orders_User_Services;
 import com.sy.hding.sys.vo.tjc.Services_User_Servicetype;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class Hanting4SysApplicationTests {
 	@Autowired
-	private Tjcservicetypebiz biz;
-	
+	private Tjcrefundbiz biz;
+	/*private Tjcservicetypebiz biz;
+	*/
 	@Test
 	public void contextLoads() throws IOException {
 		/*BufferedReader br=null;
@@ -59,7 +64,13 @@ public class Hanting4SysApplicationTests {
 	
 	@Test
 	public void ok(){
-		 biz.service_identification(1, 2, 1, 2);
+		PageInfo<Refund_Orders_User_Services> ok=biz.querysrefundt("孙子洋", 0, 1, 1);
+		for (Refund_Orders_User_Services sd : ok.getList()) {
+			System.out.println(sd.getAdminRemarks());
+			System.out.println(sd.getUserRealName());
+		}
+		
+		
 	}
 
 }

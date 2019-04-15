@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Refund_Orders_User_Services {
 		//退狂表
-	 private String refundImg;// 退款附带图片
+		private String refundImg;// 退款附带图片
 
 	    private String orderID;// 外键，订单编号
 

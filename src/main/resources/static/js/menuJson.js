@@ -58,7 +58,7 @@ var leftNav = [{
 	"text": "服务管理",
 	"leftNav_id": "12",
 	"name": "退款管理",
-	"href": "html/tkgl.html"
+	"href": "http://127.0.0.1:4321/sys/index/tkgl"
 },{
 	"text": "服务管理",
 	"leftNav_id": "13",
@@ -239,4 +239,10 @@ var leftNav = [{
 	"leftNav_id": "48",
 	"name": "退出",
 	"href": "html/tc.html"
-}]
+},{
+	"text": "退款处理",
+	"leftNav_id": "49",
+	"name": "退款处理",
+	"href": "http://127.0.0.1:4321/sys/index/tkcl"
+}
+]
